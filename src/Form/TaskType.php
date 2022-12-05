@@ -16,7 +16,6 @@ class TaskType extends AbstractType
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
             ->add('done', CheckboxType::class)
-            ->add('submit, SubmitType::class, ['label' => 'Create Task'])
         ;
     }
 
