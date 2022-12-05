@@ -42,7 +42,7 @@ class ApiController extends AbstractController
 
         $apiToken = $request->getCurrentRequest()->headers->get('api-token');
         $user = $this->objectManager->getRepository(User::class)->findOneBy([
-            'apiKey' => $apiToken,
+            'api_key' => $apiToken,
         ]);
         if (!$user instanceof User) {
             throw new HttpException(401, 'Unauthorized');
