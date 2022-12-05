@@ -39,6 +39,14 @@ class ApiController extends AbstractController
     {
         $this->taskRepository = $objectManager->getRepository(Task::class);
         $this->objectManager  = $objectManager;
+
+        $apiToken = $request->getCurrentRequest()->headers->get('api-token');
+        $user = $this->objectManager->getRepository(User::class)->findOneBy([
+            'apiKey' => $apiToken,
+        ]);
+        if (!$user instanceof User) {
+            throw new HttpException(401, 'Unauthorized');
+        }
     }
 
     /**

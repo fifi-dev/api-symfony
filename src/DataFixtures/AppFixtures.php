@@ -29,9 +29,8 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <= 10; $i++) {
             $user = new  User();
             $user->setEmail('email' . $i . '@fake-user.com');
-            $user->setApi_key('12345');
+            $user->setApi_key('12345' . $i);
             $user->setPassword("#12345678");
-            $user->set(false);
 
             $manager->persist($user);
         }
