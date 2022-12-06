@@ -23,7 +23,7 @@ class GraphqlConfig
     private $_usedProperties = [];
 
     /**
-     * @default true
+     * @default false
      * @param ParamConfigurator|bool $value
      * @return $this
      */
@@ -48,9 +48,19 @@ class GraphqlConfig
         return $this;
     }
 
-    public function graphiql(array $value = []): \Symfony\Config\ApiPlatform\Graphql\GraphiqlConfig
+    /**
+     * @return \Symfony\Config\ApiPlatform\Graphql\GraphiqlConfig|$this
+     */
+    public function graphiql(mixed $value = []): \Symfony\Config\ApiPlatform\Graphql\GraphiqlConfig|static
     {
-        if (null === $this->graphiql) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['graphiql'] = true;
+            $this->graphiql = $value;
+
+            return $this;
+        }
+
+        if (!$this->graphiql instanceof \Symfony\Config\ApiPlatform\Graphql\GraphiqlConfig) {
             $this->_usedProperties['graphiql'] = true;
             $this->graphiql = new \Symfony\Config\ApiPlatform\Graphql\GraphiqlConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -60,9 +70,19 @@ class GraphqlConfig
         return $this->graphiql;
     }
 
-    public function graphqlPlayground(array $value = []): \Symfony\Config\ApiPlatform\Graphql\GraphqlPlaygroundConfig
+    /**
+     * @return \Symfony\Config\ApiPlatform\Graphql\GraphqlPlaygroundConfig|$this
+     */
+    public function graphqlPlayground(mixed $value = []): \Symfony\Config\ApiPlatform\Graphql\GraphqlPlaygroundConfig|static
     {
-        if (null === $this->graphqlPlayground) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['graphqlPlayground'] = true;
+            $this->graphqlPlayground = $value;
+
+            return $this;
+        }
+
+        if (!$this->graphqlPlayground instanceof \Symfony\Config\ApiPlatform\Graphql\GraphqlPlaygroundConfig) {
             $this->_usedProperties['graphqlPlayground'] = true;
             $this->graphqlPlayground = new \Symfony\Config\ApiPlatform\Graphql\GraphqlPlaygroundConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -114,13 +134,13 @@ class GraphqlConfig
 
         if (array_key_exists('graphiql', $value)) {
             $this->_usedProperties['graphiql'] = true;
-            $this->graphiql = new \Symfony\Config\ApiPlatform\Graphql\GraphiqlConfig($value['graphiql']);
+            $this->graphiql = \is_array($value['graphiql']) ? new \Symfony\Config\ApiPlatform\Graphql\GraphiqlConfig($value['graphiql']) : $value['graphiql'];
             unset($value['graphiql']);
         }
 
         if (array_key_exists('graphql_playground', $value)) {
             $this->_usedProperties['graphqlPlayground'] = true;
-            $this->graphqlPlayground = new \Symfony\Config\ApiPlatform\Graphql\GraphqlPlaygroundConfig($value['graphql_playground']);
+            $this->graphqlPlayground = \is_array($value['graphql_playground']) ? new \Symfony\Config\ApiPlatform\Graphql\GraphqlPlaygroundConfig($value['graphql_playground']) : $value['graphql_playground'];
             unset($value['graphql_playground']);
         }
 
@@ -151,10 +171,10 @@ class GraphqlConfig
             $output['default_ide'] = $this->defaultIde;
         }
         if (isset($this->_usedProperties['graphiql'])) {
-            $output['graphiql'] = $this->graphiql->toArray();
+            $output['graphiql'] = $this->graphiql instanceof \Symfony\Config\ApiPlatform\Graphql\GraphiqlConfig ? $this->graphiql->toArray() : $this->graphiql;
         }
         if (isset($this->_usedProperties['graphqlPlayground'])) {
-            $output['graphql_playground'] = $this->graphqlPlayground->toArray();
+            $output['graphql_playground'] = $this->graphqlPlayground instanceof \Symfony\Config\ApiPlatform\Graphql\GraphqlPlaygroundConfig ? $this->graphqlPlayground->toArray() : $this->graphqlPlayground;
         }
         if (isset($this->_usedProperties['nestingSeparator'])) {
             $output['nesting_separator'] = $this->nestingSeparator;

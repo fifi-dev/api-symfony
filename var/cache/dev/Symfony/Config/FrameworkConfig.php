@@ -477,9 +477,19 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->request;
     }
 
-    public function assets(array $value = []): \Symfony\Config\Framework\AssetsConfig
+    /**
+     * @return \Symfony\Config\Framework\AssetsConfig|$this
+     */
+    public function assets(mixed $value = []): \Symfony\Config\Framework\AssetsConfig|static
     {
-        if (null === $this->assets) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['assets'] = true;
+            $this->assets = $value;
+
+            return $this;
+        }
+
+        if (!$this->assets instanceof \Symfony\Config\Framework\AssetsConfig) {
             $this->_usedProperties['assets'] = true;
             $this->assets = new \Symfony\Config\Framework\AssetsConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -511,9 +521,19 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->translator;
     }
 
-    public function validation(array $value = []): \Symfony\Config\Framework\ValidationConfig
+    /**
+     * @return \Symfony\Config\Framework\ValidationConfig|$this
+     */
+    public function validation(mixed $value = []): \Symfony\Config\Framework\ValidationConfig|static
     {
-        if (null === $this->validation) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['validation'] = true;
+            $this->validation = $value;
+
+            return $this;
+        }
+
+        if (!$this->validation instanceof \Symfony\Config\Framework\ValidationConfig) {
             $this->_usedProperties['validation'] = true;
             $this->validation = new \Symfony\Config\Framework\ValidationConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -523,9 +543,19 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->validation;
     }
 
-    public function annotations(array $value = []): \Symfony\Config\Framework\AnnotationsConfig
+    /**
+     * @return \Symfony\Config\Framework\AnnotationsConfig|$this
+     */
+    public function annotations(mixed $value = []): \Symfony\Config\Framework\AnnotationsConfig|static
     {
-        if (null === $this->annotations) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['annotations'] = true;
+            $this->annotations = $value;
+
+            return $this;
+        }
+
+        if (!$this->annotations instanceof \Symfony\Config\Framework\AnnotationsConfig) {
             $this->_usedProperties['annotations'] = true;
             $this->annotations = new \Symfony\Config\Framework\AnnotationsConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -535,9 +565,19 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->annotations;
     }
 
-    public function serializer(array $value = []): \Symfony\Config\Framework\SerializerConfig
+    /**
+     * @return \Symfony\Config\Framework\SerializerConfig|$this
+     */
+    public function serializer(mixed $value = []): \Symfony\Config\Framework\SerializerConfig|static
     {
-        if (null === $this->serializer) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['serializer'] = true;
+            $this->serializer = $value;
+
+            return $this;
+        }
+
+        if (!$this->serializer instanceof \Symfony\Config\Framework\SerializerConfig) {
             $this->_usedProperties['serializer'] = true;
             $this->serializer = new \Symfony\Config\Framework\SerializerConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -547,9 +587,19 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->serializer;
     }
 
-    public function propertyAccess(array $value = []): \Symfony\Config\Framework\PropertyAccessConfig
+    /**
+     * @return \Symfony\Config\Framework\PropertyAccessConfig|$this
+     */
+    public function propertyAccess(mixed $value = []): \Symfony\Config\Framework\PropertyAccessConfig|static
     {
-        if (null === $this->propertyAccess) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['propertyAccess'] = true;
+            $this->propertyAccess = $value;
+
+            return $this;
+        }
+
+        if (!$this->propertyAccess instanceof \Symfony\Config\Framework\PropertyAccessConfig) {
             $this->_usedProperties['propertyAccess'] = true;
             $this->propertyAccess = new \Symfony\Config\Framework\PropertyAccessConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -559,9 +609,19 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->propertyAccess;
     }
 
-    public function propertyInfo(array $value = []): \Symfony\Config\Framework\PropertyInfoConfig
+    /**
+     * @return \Symfony\Config\Framework\PropertyInfoConfig|$this
+     */
+    public function propertyInfo(mixed $value = []): \Symfony\Config\Framework\PropertyInfoConfig|static
     {
-        if (null === $this->propertyInfo) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['propertyInfo'] = true;
+            $this->propertyInfo = $value;
+
+            return $this;
+        }
+
+        if (!$this->propertyInfo instanceof \Symfony\Config\Framework\PropertyInfoConfig) {
             $this->_usedProperties['propertyInfo'] = true;
             $this->propertyInfo = new \Symfony\Config\Framework\PropertyInfoConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -610,9 +670,19 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->exceptions[] = new \Symfony\Config\Framework\ExceptionsConfig($value);
     }
 
-    public function webLink(array $value = []): \Symfony\Config\Framework\WebLinkConfig
+    /**
+     * @return \Symfony\Config\Framework\WebLinkConfig|$this
+     */
+    public function webLink(mixed $value = []): \Symfony\Config\Framework\WebLinkConfig|static
     {
-        if (null === $this->webLink) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['webLink'] = true;
+            $this->webLink = $value;
+
+            return $this;
+        }
+
+        if (!$this->webLink instanceof \Symfony\Config\Framework\WebLinkConfig) {
             $this->_usedProperties['webLink'] = true;
             $this->webLink = new \Symfony\Config\Framework\WebLinkConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -949,7 +1019,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('assets', $value)) {
             $this->_usedProperties['assets'] = true;
-            $this->assets = new \Symfony\Config\Framework\AssetsConfig($value['assets']);
+            $this->assets = \is_array($value['assets']) ? new \Symfony\Config\Framework\AssetsConfig($value['assets']) : $value['assets'];
             unset($value['assets']);
         }
 
@@ -961,31 +1031,31 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('validation', $value)) {
             $this->_usedProperties['validation'] = true;
-            $this->validation = new \Symfony\Config\Framework\ValidationConfig($value['validation']);
+            $this->validation = \is_array($value['validation']) ? new \Symfony\Config\Framework\ValidationConfig($value['validation']) : $value['validation'];
             unset($value['validation']);
         }
 
         if (array_key_exists('annotations', $value)) {
             $this->_usedProperties['annotations'] = true;
-            $this->annotations = new \Symfony\Config\Framework\AnnotationsConfig($value['annotations']);
+            $this->annotations = \is_array($value['annotations']) ? new \Symfony\Config\Framework\AnnotationsConfig($value['annotations']) : $value['annotations'];
             unset($value['annotations']);
         }
 
         if (array_key_exists('serializer', $value)) {
             $this->_usedProperties['serializer'] = true;
-            $this->serializer = new \Symfony\Config\Framework\SerializerConfig($value['serializer']);
+            $this->serializer = \is_array($value['serializer']) ? new \Symfony\Config\Framework\SerializerConfig($value['serializer']) : $value['serializer'];
             unset($value['serializer']);
         }
 
         if (array_key_exists('property_access', $value)) {
             $this->_usedProperties['propertyAccess'] = true;
-            $this->propertyAccess = new \Symfony\Config\Framework\PropertyAccessConfig($value['property_access']);
+            $this->propertyAccess = \is_array($value['property_access']) ? new \Symfony\Config\Framework\PropertyAccessConfig($value['property_access']) : $value['property_access'];
             unset($value['property_access']);
         }
 
         if (array_key_exists('property_info', $value)) {
             $this->_usedProperties['propertyInfo'] = true;
-            $this->propertyInfo = new \Symfony\Config\Framework\PropertyInfoConfig($value['property_info']);
+            $this->propertyInfo = \is_array($value['property_info']) ? new \Symfony\Config\Framework\PropertyInfoConfig($value['property_info']) : $value['property_info'];
             unset($value['property_info']);
         }
 
@@ -1009,7 +1079,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('web_link', $value)) {
             $this->_usedProperties['webLink'] = true;
-            $this->webLink = new \Symfony\Config\Framework\WebLinkConfig($value['web_link']);
+            $this->webLink = \is_array($value['web_link']) ? new \Symfony\Config\Framework\WebLinkConfig($value['web_link']) : $value['web_link'];
             unset($value['web_link']);
         }
 
@@ -1145,25 +1215,25 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
             $output['request'] = $this->request instanceof \Symfony\Config\Framework\RequestConfig ? $this->request->toArray() : $this->request;
         }
         if (isset($this->_usedProperties['assets'])) {
-            $output['assets'] = $this->assets->toArray();
+            $output['assets'] = $this->assets instanceof \Symfony\Config\Framework\AssetsConfig ? $this->assets->toArray() : $this->assets;
         }
         if (isset($this->_usedProperties['translator'])) {
             $output['translator'] = $this->translator instanceof \Symfony\Config\Framework\TranslatorConfig ? $this->translator->toArray() : $this->translator;
         }
         if (isset($this->_usedProperties['validation'])) {
-            $output['validation'] = $this->validation->toArray();
+            $output['validation'] = $this->validation instanceof \Symfony\Config\Framework\ValidationConfig ? $this->validation->toArray() : $this->validation;
         }
         if (isset($this->_usedProperties['annotations'])) {
-            $output['annotations'] = $this->annotations->toArray();
+            $output['annotations'] = $this->annotations instanceof \Symfony\Config\Framework\AnnotationsConfig ? $this->annotations->toArray() : $this->annotations;
         }
         if (isset($this->_usedProperties['serializer'])) {
-            $output['serializer'] = $this->serializer->toArray();
+            $output['serializer'] = $this->serializer instanceof \Symfony\Config\Framework\SerializerConfig ? $this->serializer->toArray() : $this->serializer;
         }
         if (isset($this->_usedProperties['propertyAccess'])) {
-            $output['property_access'] = $this->propertyAccess->toArray();
+            $output['property_access'] = $this->propertyAccess instanceof \Symfony\Config\Framework\PropertyAccessConfig ? $this->propertyAccess->toArray() : $this->propertyAccess;
         }
         if (isset($this->_usedProperties['propertyInfo'])) {
-            $output['property_info'] = $this->propertyInfo->toArray();
+            $output['property_info'] = $this->propertyInfo instanceof \Symfony\Config\Framework\PropertyInfoConfig ? $this->propertyInfo->toArray() : $this->propertyInfo;
         }
         if (isset($this->_usedProperties['cache'])) {
             $output['cache'] = $this->cache->toArray();
@@ -1175,7 +1245,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
             $output['exceptions'] = array_map(function ($v) { return $v instanceof \Symfony\Config\Framework\ExceptionsConfig ? $v->toArray() : $v; }, $this->exceptions);
         }
         if (isset($this->_usedProperties['webLink'])) {
-            $output['web_link'] = $this->webLink->toArray();
+            $output['web_link'] = $this->webLink instanceof \Symfony\Config\Framework\WebLinkConfig ? $this->webLink->toArray() : $this->webLink;
         }
         if (isset($this->_usedProperties['lock'])) {
             $output['lock'] = $this->lock instanceof \Symfony\Config\Framework\LockConfig ? $this->lock->toArray() : $this->lock;

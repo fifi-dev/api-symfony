@@ -442,9 +442,19 @@ class ApiPlatformConfig implements \Symfony\Component\Config\Builder\ConfigBuild
         return $this->oauth;
     }
 
-    public function graphql(array $value = []): \Symfony\Config\ApiPlatform\GraphqlConfig
+    /**
+     * @return \Symfony\Config\ApiPlatform\GraphqlConfig|$this
+     */
+    public function graphql(mixed $value = []): \Symfony\Config\ApiPlatform\GraphqlConfig|static
     {
-        if (null === $this->graphql) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['graphql'] = true;
+            $this->graphql = $value;
+
+            return $this;
+        }
+
+        if (!$this->graphql instanceof \Symfony\Config\ApiPlatform\GraphqlConfig) {
             $this->_usedProperties['graphql'] = true;
             $this->graphql = new \Symfony\Config\ApiPlatform\GraphqlConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -556,9 +566,19 @@ class ApiPlatformConfig implements \Symfony\Component\Config\Builder\ConfigBuild
         return $this->openapi;
     }
 
-    public function maker(array $value = []): \Symfony\Config\ApiPlatform\MakerConfig
+    /**
+     * @return \Symfony\Config\ApiPlatform\MakerConfig|$this
+     */
+    public function maker(mixed $value = []): \Symfony\Config\ApiPlatform\MakerConfig|static
     {
-        if (null === $this->maker) {
+        if (!\is_array($value)) {
+            $this->_usedProperties['maker'] = true;
+            $this->maker = $value;
+
+            return $this;
+        }
+
+        if (!$this->maker instanceof \Symfony\Config\ApiPlatform\MakerConfig) {
             $this->_usedProperties['maker'] = true;
             $this->maker = new \Symfony\Config\ApiPlatform\MakerConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -832,7 +852,7 @@ class ApiPlatformConfig implements \Symfony\Component\Config\Builder\ConfigBuild
 
         if (array_key_exists('graphql', $value)) {
             $this->_usedProperties['graphql'] = true;
-            $this->graphql = new \Symfony\Config\ApiPlatform\GraphqlConfig($value['graphql']);
+            $this->graphql = \is_array($value['graphql']) ? new \Symfony\Config\ApiPlatform\GraphqlConfig($value['graphql']) : $value['graphql'];
             unset($value['graphql']);
         }
 
@@ -874,7 +894,7 @@ class ApiPlatformConfig implements \Symfony\Component\Config\Builder\ConfigBuild
 
         if (array_key_exists('maker', $value)) {
             $this->_usedProperties['maker'] = true;
-            $this->maker = new \Symfony\Config\ApiPlatform\MakerConfig($value['maker']);
+            $this->maker = \is_array($value['maker']) ? new \Symfony\Config\ApiPlatform\MakerConfig($value['maker']) : $value['maker'];
             unset($value['maker']);
         }
 
@@ -995,7 +1015,7 @@ class ApiPlatformConfig implements \Symfony\Component\Config\Builder\ConfigBuild
             $output['oauth'] = $this->oauth instanceof \Symfony\Config\ApiPlatform\OauthConfig ? $this->oauth->toArray() : $this->oauth;
         }
         if (isset($this->_usedProperties['graphql'])) {
-            $output['graphql'] = $this->graphql->toArray();
+            $output['graphql'] = $this->graphql instanceof \Symfony\Config\ApiPlatform\GraphqlConfig ? $this->graphql->toArray() : $this->graphql;
         }
         if (isset($this->_usedProperties['swagger'])) {
             $output['swagger'] = $this->swagger->toArray();
@@ -1016,7 +1036,7 @@ class ApiPlatformConfig implements \Symfony\Component\Config\Builder\ConfigBuild
             $output['openapi'] = $this->openapi->toArray();
         }
         if (isset($this->_usedProperties['maker'])) {
-            $output['maker'] = $this->maker->toArray();
+            $output['maker'] = $this->maker instanceof \Symfony\Config\ApiPlatform\MakerConfig ? $this->maker->toArray() : $this->maker;
         }
         if (isset($this->_usedProperties['exceptionToStatus'])) {
             $output['exception_to_status'] = $this->exceptionToStatus;
