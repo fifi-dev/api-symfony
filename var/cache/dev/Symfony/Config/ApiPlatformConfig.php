@@ -442,19 +442,9 @@ class ApiPlatformConfig implements \Symfony\Component\Config\Builder\ConfigBuild
         return $this->oauth;
     }
 
-    /**
-     * @return \Symfony\Config\ApiPlatform\GraphqlConfig|$this
-     */
-    public function graphql(mixed $value = []): \Symfony\Config\ApiPlatform\GraphqlConfig|static
+    public function graphql(array $value = []): \Symfony\Config\ApiPlatform\GraphqlConfig
     {
-        if (!\is_array($value)) {
-            $this->_usedProperties['graphql'] = true;
-            $this->graphql = $value;
-
-            return $this;
-        }
-
-        if (!$this->graphql instanceof \Symfony\Config\ApiPlatform\GraphqlConfig) {
+        if (null === $this->graphql) {
             $this->_usedProperties['graphql'] = true;
             $this->graphql = new \Symfony\Config\ApiPlatform\GraphqlConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -842,7 +832,7 @@ class ApiPlatformConfig implements \Symfony\Component\Config\Builder\ConfigBuild
 
         if (array_key_exists('graphql', $value)) {
             $this->_usedProperties['graphql'] = true;
-            $this->graphql = \is_array($value['graphql']) ? new \Symfony\Config\ApiPlatform\GraphqlConfig($value['graphql']) : $value['graphql'];
+            $this->graphql = new \Symfony\Config\ApiPlatform\GraphqlConfig($value['graphql']);
             unset($value['graphql']);
         }
 
@@ -1005,7 +995,7 @@ class ApiPlatformConfig implements \Symfony\Component\Config\Builder\ConfigBuild
             $output['oauth'] = $this->oauth instanceof \Symfony\Config\ApiPlatform\OauthConfig ? $this->oauth->toArray() : $this->oauth;
         }
         if (isset($this->_usedProperties['graphql'])) {
-            $output['graphql'] = $this->graphql instanceof \Symfony\Config\ApiPlatform\GraphqlConfig ? $this->graphql->toArray() : $this->graphql;
+            $output['graphql'] = $this->graphql->toArray();
         }
         if (isset($this->_usedProperties['swagger'])) {
             $output['swagger'] = $this->swagger->toArray();
