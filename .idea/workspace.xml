@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f8cccdf-c2f9-4a54-a8c2-17d50ecb2629" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +45,7 @@
       <updated>1670237793119</updated>
       <workItem from="1670237794936" duration="7297000" />
       <workItem from="1670253623576" duration="567000" />
-      <workItem from="1670255027634" duration="4498000" />
+      <workItem from="1670255027634" duration="4605000" />
     </task>
     <servers />
   </component>
